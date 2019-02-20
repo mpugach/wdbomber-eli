@@ -53,7 +53,22 @@ defmodule Wdbomber do
     region: #{region}
     """)
 
-    Processor.run(url, iterations, concurrency, actions, region)
+    iterations_length = iterations |> Integer.to_string() |> String.length()
+    concurrency_length = concurrency |> Integer.to_string() |> String.length()
+    padding = iterations_length + concurrency_length + 1
+
+    labels =
+      for iteration <- 1..iterations,
+          concurrency_id <- 1..concurrency,
+          do: String.pad_trailing("#{iteration}/#{concurrency_id}", padding)
+
+    labels
+    |> Flow.from_enumerable(stages: concurrency, max_demand: 1)
+    |> Flow.each(&Processor.run_single(&1, url, actions, region))
+    |> Flow.run()
+
+    IO.puts("OK")
+
     System.halt(0)
   end
 

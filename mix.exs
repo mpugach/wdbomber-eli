@@ -22,6 +22,7 @@ defmodule Wdbomber.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:flow, "~> 0.14"},
       {:httpoison, "~> 1.4"},
       {:jason, "~> 1.1"}
     ]
