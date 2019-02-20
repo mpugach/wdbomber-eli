@@ -20,6 +20,7 @@ defmodule Wdbomber.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
       {:flow, "~> 0.14"},
       {:httpoison, "~> 1.4"},
       {:jason, "~> 1.1"}

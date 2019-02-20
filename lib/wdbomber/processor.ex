@@ -1,10 +1,8 @@
 defmodule Wdbomber.Processor do
   @moduledoc false
 
-  alias Wdbomber.Client
   alias HTTPoison.Response
-
-  @recv_timeout 1_500_000
+  alias Wdbomber.Client
 
   def run_single(label, url, actions, region) do
     start_time = DateTime.utc_now()
@@ -15,13 +13,14 @@ defmodule Wdbomber.Processor do
          :ok <- session_navigate_actions(session_url, "about:blank", actions),
          {:ok, %Response{body: session_destroy_body}} <- Client.session_destroy(session_url),
          {:ok, %{"status" => 0}} <- Jason.decode(session_destroy_body) do
-      seconds_spent = DateTime.diff(DateTime.utc_now(), start_time, :microsecond) / 1000_000
+      seconds_spent = DateTime.diff(DateTime.utc_now(), start_time, :microsecond) / 1_000_000
 
       IO.puts("#{label}: took #{seconds_spent}s")
 
       :ok
     else
       error ->
+        # credo:disable-for-next-line
         IO.inspect(error, label: "#{label}: errored")
 
         {:error, error}
