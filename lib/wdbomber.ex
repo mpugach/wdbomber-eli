@@ -16,7 +16,13 @@ defmodule Wdbomber do
 
     case options do
       {[region: region], [url, iterations, concurrency, actions], _} ->
-        [url, Integer.parse(iterations), Integer.parse(concurrency), Integer.parse(actions), region]
+        [
+          url,
+          Integer.parse(iterations),
+          Integer.parse(concurrency),
+          Integer.parse(actions),
+          region
+        ]
 
       {_, [url, iterations, concurrency, actions], _} ->
         [url, Integer.parse(iterations), Integer.parse(concurrency), Integer.parse(actions), nil]
@@ -52,6 +58,14 @@ defmodule Wdbomber do
     actions: #{actions}
     region: #{region}
     """)
+
+    children = [
+      :hackney_pool.child_spec(:httpoison_pool, [timeout: 1_500_000, max_connections: concurrency])
+    ]
+
+    opts = [strategy: :one_for_one, name: Wdbomber.Supervisor]
+
+    Supervisor.start_link(children, opts)
 
     iterations_length = iterations |> Integer.to_string() |> String.length()
     concurrency_length = concurrency |> Integer.to_string() |> String.length()

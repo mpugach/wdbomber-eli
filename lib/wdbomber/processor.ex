@@ -29,15 +29,24 @@ defmodule Wdbomber.Processor do
   end
 
   defp session_create(url, region) do
-    HTTPoison.post(url <> "/session", desired_capabilities_body(region), [], [recv_timeout: @recv_timeout])
+    HTTPoison.post(url <> "/session", desired_capabilities_body(region), [],
+      recv_timeout: @recv_timeout,
+      hackney: [pool: :httpoison_pool]
+    )
   end
 
   defp session_navigate(session_url, url_to_navigate) do
-    HTTPoison.post(session_url <> "/url", ~s({"url":"#{url_to_navigate}"}), [], [recv_timeout: @recv_timeout])
+    HTTPoison.post(session_url <> "/url", ~s({"url":"#{url_to_navigate}"}), [],
+      recv_timeout: @recv_timeout,
+      hackney: [pool: :httpoison_pool]
+    )
   end
 
   defp session_destroy(session_url) do
-    HTTPoison.delete(session_url, [], [recv_timeout: @recv_timeout])
+    HTTPoison.delete(session_url, [],
+      recv_timeout: @recv_timeout,
+      hackney: [pool: :httpoison_pool]
+    )
   end
 
   defp desired_capabilities_body(nil),
