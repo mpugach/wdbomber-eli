@@ -10,8 +10,8 @@ defmodule Wdbomber do
   defp parse_args(args) do
     options =
       OptionParser.parse(args,
-        aliases: [h: :help, r: :region],
-        strict: [help: :boolean, region: :string]
+        aliases: [h: :help, r: :region, v: :version],
+        strict: [help: :boolean, region: :string, version: :boolean]
       )
 
     case options do
@@ -30,9 +30,18 @@ defmodule Wdbomber do
       {[help: true], _, _} ->
         {:help, 0}
 
+      {[version: true], _, _} ->
+        :version
+
       _ ->
         {:help, 1}
     end
+  end
+
+  @version Mix.Project.config[:version]
+  defp do_process(:version) do
+    IO.puts(@version)
+    System.halt(0)
   end
 
   defp do_process({:help, status}) do
@@ -45,6 +54,7 @@ defmodule Wdbomber do
       Options:
       -h, --help                 Show this help message.
       -r REGION, --region=REGION Specify a region.
+      -v, --version              Show version.
     """)
 
     System.halt(status)

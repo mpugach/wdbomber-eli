@@ -4,18 +4,17 @@
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `wdbomber` to your list of dependencies in `mix.exs`:
+```mix escript.install https://github.com/mpugach/wdbomber-eli/raw/0.1.1/wdbomber```
 
-```elixir
-def deps do
-  [
-    {:wdbomber, "~> 0.1.0"}
-  ]
-end
+## Usage
+
 ```
+wdbomber URL ITERATIONS CONCURRENCY ACTIONS OPTIONS
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/wdbomber](https://hexdocs.pm/wdbomber).
+ITERATIONS, CONCURRENCY and ACTIONS should be numbers
 
+Options:
+-h, --help                 Show this help message.
+-r REGION, --region=REGION Specify a region.
+-v, --version              Show version.
+```
