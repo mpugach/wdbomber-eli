@@ -59,10 +59,7 @@ defmodule Wdbomber do
     region: #{region}
     """)
 
-    children = [
-      :hackney_pool.child_spec(:httpoison_pool, [timeout: 1_500_000, max_connections: concurrency])
-    ]
-
+    children = [Wdbomber.Client.pool_worker(concurrency)]
     opts = [strategy: :one_for_one, name: Wdbomber.Supervisor]
 
     Supervisor.start_link(children, opts)
