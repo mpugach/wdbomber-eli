@@ -18,3 +18,9 @@ Options:
 -r REGION, --region=REGION Specify a region.
 -v, --version              Show version.
 ```
+
+or
+
+```
+docker run --rm mpugach/wdbomber:0.1.1 URL ITERATIONS CONCURRENCY ACTIONS --region REGION
+```
