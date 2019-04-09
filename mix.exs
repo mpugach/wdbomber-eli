@@ -4,7 +4,7 @@ defmodule Wdbomber.MixProject do
   def project do
     [
       app: :wdbomber,
-      version: "0.1.3",
+      version: "0.1.4",
       elixir: "~> 1.8",
       escript: [main_module: Wdbomber],
       start_permanent: Mix.env() == :prod,

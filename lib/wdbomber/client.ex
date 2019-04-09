@@ -3,7 +3,7 @@ defmodule Wdbomber.Client do
 
   @timeout 1_500_000
   @headers [{"Content-Type", "application/json"}]
-  @default_capabilities ~s("browserName":"chrome","chromeOptions":{"args":["--no-sandbox"]})
+  @default_capabilities ~s("browserName":"chrome")
   @options [
     timeout: @timeout,
     recv_timeout: @timeout,
