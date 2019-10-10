@@ -4,7 +4,7 @@ A tool to load test webdriver infrastructure
 
 ## Installation
 
-```mix escript.install https://github.com/mpugach/wdbomber-eli/raw/0.1.5/wdbomber```
+```mix escript.install https://github.com/mpugach/wdbomber-eli/raw/0.1.6/wdbomber```
 
 or
 
@@ -16,7 +16,7 @@ or
 
 or
 
-```docker run --rm mpugach/wdbomber:0.1.5 URL ITERATIONS CONCURRENCY ACTIONS OPTIONS```
+```docker run --rm mpugach/wdbomber:0.1.6 URL ITERATIONS CONCURRENCY ACTIONS OPTIONS```
 
 ITERATIONS, CONCURRENCY and ACTIONS should be numbers
 

@@ -7,11 +7,7 @@ defmodule Wdbomber.Client do
   @options [
     timeout: @timeout,
     recv_timeout: @timeout,
-    hackney: [pool: :httpoison_pool]
   ]
-
-  def pool_worker(max_connections),
-    do: :hackney_pool.child_spec(:httpoison_pool, [timeout: @timeout, max_connections: max_connections])
 
   def session_create(url, region) do
     HTTPoison.post(url <> "/session", desired_capabilities_body(region), @headers, @options)

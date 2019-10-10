@@ -69,11 +69,6 @@ defmodule Wdbomber do
     region: #{region}
     """)
 
-    children = [Wdbomber.Client.pool_worker(concurrency)]
-    opts = [strategy: :one_for_one, name: Wdbomber.Supervisor]
-
-    Supervisor.start_link(children, opts)
-
     iterations_length = iterations |> Integer.to_string() |> String.length()
     concurrency_length = concurrency |> Integer.to_string() |> String.length()
     padding = iterations_length + concurrency_length + 1
